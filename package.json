@@ -1,12 +1,12 @@
 {
   "name": "http2mqtt",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "",
   "main": "main.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node main.mjs",
-    "main": "nodemon --env-file=.env main.mjs"
+    "start": "node ./src/main.mjs",
+    "main": "nodemon --env-file=.env src/main.mjs"
   },
   "keywords": [],
   "author": "Luis Alberto Pérez García <luixal@gmail.com>",

@@ -10,7 +10,7 @@ class MqttClient {
         options: {
           translateTime: 'HH:mm:ss Z',
           ignore: 'pid,hostname,reqId,responseTime,req,res,message',
-          messageFormat: '\u001b[34m[MQTT][reqId] {message}\u001b[0m'
+          messageFormat: '\u001b[34m[MQTT][{reqId}] {message}\u001b[0m'
         }
       },
     },
@@ -45,7 +45,7 @@ class MqttClient {
   async publish(topic, message, reqId) {
     try {
       await this.client.publishAsync(topic, message);
-      this.logger.info({message: 'Message published'});
+      this.logger.info({message: 'Message published', reqId});
       return {sucess: true, message: message};
     } catch(err) {
       this.logger.error({message: 'Error publishing message'});
