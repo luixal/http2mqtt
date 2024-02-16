@@ -1,10 +1,11 @@
 {
   "name": "http2mqtt",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "main.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.mjs",
     "main": "nodemon --env-file=.env main.mjs"
   },
   "keywords": [],
