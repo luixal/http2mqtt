@@ -1,0 +1,22 @@
+{
+  "name": "http2mqtt",
+  "version": "0.1.0",
+  "description": "",
+  "main": "main.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "main": "nodemon --env-file=.env main.mjs"
+  },
+  "keywords": [],
+  "author": "Luis Alberto Pérez García <luixal@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "fastify": "^4.26.0",
+    "mqtt": "^5.3.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3",
+    "pino": "^8.18.0",
+    "pino-pretty": "^10.3.1"
+  }
+}
