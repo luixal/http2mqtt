@@ -14,6 +14,13 @@ const MQTT_TOPIC = process.env.MQTT_TOPIC;
 const MQTT_CONNECT_TIMEOUT = process.env.MQTT_CONNECT_TIMEOUT;
 const MQTT_RECONNECT_PERIOD = process.env.MQTT_RECONNECT_PERIOD;
 
+console.log(`http2mqtt v.${process.env.npm_package_version}\n`);
+// check for minimum variables:
+if (!MQTT_HOST || !MQTT_TOPIC) {
+  console.log(`You must provide minimum config values:${!MQTT_HOST ? '\n\t- MQTT_HOST is missing' : ''}${!MQTT_TOPIC ? '\n\t- MQTT_TOPIC is missing' : ''}`);
+  process.exit(1);
+}
+
 // fastify logger:
 const loggerFastify = {
   development: {
@@ -85,7 +92,6 @@ fastify.post(
 
 
 // main code:
-console.log(`http2mqtt v.${process.env.npm_package_version}\n`);
 try {
   // connect to mqtt broker:
   await mqttClient.connect();
