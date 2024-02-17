@@ -49,7 +49,7 @@ npm run main
 To run the app using docker with these command (set the env values you need from the Configuration section):
 
 ```
-docker run --name http2mqtt --env MQTT_HOST=my.mqtt.broker --env MQTT_TOPIC=my_topic -d luixal/http2mqtt:latest
+docker run --name luixal/http2mqtt --env MQTT_HOST=my.mqtt.broker --env MQTT_TOPIC=my_topic -d luixal/http2mqtt:latest
 ```
 
 Or you can just use docker compose with a docker-compose.yml file like this one:
@@ -67,7 +67,7 @@ services:
       MQTT_HOST: my.mqtt.broker
       MQTT_PORT: 1883
       MQTT_PROTOCOL: mqtt
-      MQTT_CLIENT_ID: my_mqtt_client_id
+      MQTT_CLIENT_ID: my_mqtt_client_id 
       MQTT_USERNAME: my_username
       MQTT_PASSWORD: my_password
       MQTT_TOPIC: my_topic
