@@ -89,6 +89,8 @@ The available variables are:
 | Variable | Description | Default | Mandatory |
 | -------- | ----------- | ------- | --------- |
 | HTTP_API_KEY | An api-key for a minimum security | '' | NO |
+| HTTP_GET_PATH | Path in url for GET queries | '/' | NO |
+| HTTP_POST_PATH | Path in url for POST queries | '/' | NO |
 | MQTT_HOST | Address/IP for the mqtt broker | '' | YES |
 | MQTT_PORT | Port to use for the mqtt broker | 1883 | NO |
 | MQTT_PROTOCOL | Protocol to connect the mqtt broker | 'MQTT' | NO |
@@ -102,25 +104,14 @@ The available variables are:
 NOTE: this app uses [MQTT.js](https://github.com/mqttjs) so the default values for its options are the same. You can check them [here](https://github.com/mqttjs/MQTT.js?tab=readme-ov-file#mqttclientstreambuilder-options).
 
 ## API-KEY
-The api-key is used for a minimum security (at least in the POST query).
+The api-key is used for a minimum security. It only applies to the the POST query.
 
 If you set it, for example, like this:
 
 ```env
 HTTP_API_KEY=aaa
 ```
-
-### GET Endpoint
-In the GET query is used as the relative path to listen to, in this case the GET endpoint will be:
-
-```http
-http://your.server:3000/aaa
-```
-
-Nothing fancy.
-
-### POST Endpoint
-In the POST query, the endpoint is always `/` like:
+ and send a POST query to this url:
 
 ```http
 http://your.server:3000/
