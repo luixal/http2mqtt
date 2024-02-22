@@ -91,13 +91,15 @@ The available variables are:
 | HTTP_API_KEY | An api-key for a minimum security | '' | NO |
 | HTTP_GET_PATH | Path in url for GET queries | '/' | NO |
 | HTTP_POST_PATH | Path in url for POST queries | '/' | NO |
-| MQTT_HOST | Address/IP for the mqtt broker | '' | YES |
+| HTTP_DISABLE_GET | Wheter to disable GET queries or not | 'false' | NO |
+| HTTP_DISABLE_POST | Wheter to disable POST queries or not | 'false' | NO |
+| MQTT_HOST | Address/IP for the mqtt broker | '' | **YES** |
 | MQTT_PORT | Port to use for the mqtt broker | 1883 | NO |
 | MQTT_PROTOCOL | Protocol to connect the mqtt broker | 'MQTT' | NO |
 | MQTT_CLIENT_ID | Client ID to use in the mqtt connection | 'mqttjs_' + Math.random().toString(16).substr(2, 8) | NO |
 | MQTT_USERNAME | Username for the mqtt connection | '' | NO |
 | MQTT_PASSWORD | Password for the mqtt connection | '' | NO |
-| MQTT_TOPIC | Topic to publish the messages | '' | YES |
+| MQTT_TOPIC | Topic to publish the messages | '' | **YES** |
 | MQTT_CONNECT_TIMEOUT | Mqtt connection timeout | 30000 | NO |
 | MQTT_RECONNECT_PERIOD | Mqtt reconnect time | 1000 | NO |
 
