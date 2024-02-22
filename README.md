@@ -89,38 +89,31 @@ The available variables are:
 | Variable | Description | Default | Mandatory |
 | -------- | ----------- | ------- | --------- |
 | HTTP_API_KEY | An api-key for a minimum security | '' | NO |
-| MQTT_HOST | Address/IP for the mqtt broker | '' | YES |
+| HTTP_GET_PATH | Path in url for GET queries | '/' | NO |
+| HTTP_POST_PATH | Path in url for POST queries | '/' | NO |
+| HTTP_DISABLE_GET | Wheter to disable GET queries or not | 'false' | NO |
+| HTTP_DISABLE_POST | Wheter to disable POST queries or not | 'false' | NO |
+| MQTT_HOST | Address/IP for the mqtt broker | '' | **YES** |
 | MQTT_PORT | Port to use for the mqtt broker | 1883 | NO |
 | MQTT_PROTOCOL | Protocol to connect the mqtt broker | 'MQTT' | NO |
 | MQTT_CLIENT_ID | Client ID to use in the mqtt connection | 'mqttjs_' + Math.random().toString(16).substr(2, 8) | NO |
 | MQTT_USERNAME | Username for the mqtt connection | '' | NO |
 | MQTT_PASSWORD | Password for the mqtt connection | '' | NO |
-| MQTT_TOPIC | Topic to publish the messages | '' | YES |
+| MQTT_TOPIC | Topic to publish the messages | '' | **YES** |
 | MQTT_CONNECT_TIMEOUT | Mqtt connection timeout | 30000 | NO |
 | MQTT_RECONNECT_PERIOD | Mqtt reconnect time | 1000 | NO |
 
 NOTE: this app uses [MQTT.js](https://github.com/mqttjs) so the default values for its options are the same. You can check them [here](https://github.com/mqttjs/MQTT.js?tab=readme-ov-file#mqttclientstreambuilder-options).
 
 ## API-KEY
-The api-key is used for a minimum security (at least in the POST query).
+The api-key is used for a minimum security. It only applies to the the POST query.
 
 If you set it, for example, like this:
 
 ```env
 HTTP_API_KEY=aaa
 ```
-
-### GET Endpoint
-In the GET query is used as the relative path to listen to, in this case the GET endpoint will be:
-
-```http
-http://your.server:3000/aaa
-```
-
-Nothing fancy.
-
-### POST Endpoint
-In the POST query, the endpoint is always `/` like:
+ and send a POST query to this url:
 
 ```http
 http://your.server:3000/

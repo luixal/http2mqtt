@@ -2,7 +2,12 @@ import Fastify from "fastify";
 import MqttClient from "./mqtt.mjs";
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
+// http env variables:
 const HTTP_API_KEY = process.env.HTTP_API_KEY;
+const HTTP_GET_PATH = process.env.HTTP_GET_PATH || '/';
+const HTTP_DISABLE_GET = process.env.HTTP_DISABLE_GET.toLocaleLowerCase() === 'true';
+const HTTP_POST_PATH = process.env.HTTP_POST_PATH || '/';
+const HTTP_DISABLE_POST = process.env.HTTP_DISABLE_POST.toLocaleLowerCase() === 'true';
 // mqtt env variables:
 const MQTT_HOST = process.env.MQTT_HOST;
 const MQTT_PORT = process.env.MQTT_PORT;
@@ -65,7 +70,7 @@ if (!HTTP_API_KEY) fastify.log.warn('No API-KEY defined. You\'re going wild!');
 fastify.addHook(
   'onRequest',
   (req, res, done) => {
-    if (req.params.apiKey === HTTP_API_KEY || req.headers['x-api-key'] === HTTP_API_KEY) {
+    if (!HTTP_API_KEY || (req.headers['x-api-key'] && req.headers['x-api-key'] === HTTP_API_KEY)) {
       done();
     } else {
       fastify.log.warn('Invalid API-KEY in request');
@@ -74,21 +79,33 @@ fastify.addHook(
   }
 );
 
-// GET route:
-fastify.get(
-  '/:apiKey',
-  async function handler(req, res) {
-    return await mqttClient.publish(MQTT_TOPIC, JSON.stringify(req.query), req.id);
+// registering routes:
+try {
+  // GET route:
+  if (!HTTP_DISABLE_GET) {
+    fastify.get(
+      HTTP_GET_PATH,
+      async function handler(req, res) {
+        return await mqttClient.publish(MQTT_TOPIC, JSON.stringify(req.query), req.id);
+      }
+    );
+    fastify.log.info(`GET Route registered: ${HTTP_GET_PATH}`);
   }
-);
 
-// POST route:
-fastify.post(
-  '/',
-  async function handler(req, res) {
-    return await mqttClient.publish(MQTT_TOPIC, JSON.stringify(req.body), req.id);
+  // POST route:
+  if (!HTTP_DISABLE_POST) {
+    fastify.post(
+      HTTP_POST_PATH,
+      async function handler(req, res) {
+        return await mqttClient.publish(MQTT_TOPIC, JSON.stringify(req.body), req.id);
+      }
+    );
+    fastify.log.info(`POST Route registered: ${HTTP_POST_PATH}`);
   }
-)
+
+} catch(err) {
+  fastify.log.error(`ERROR: ${err.message}`);
+}
 
 
 // main code:
